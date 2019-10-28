@@ -8,7 +8,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Fluent API for Keycloak.NET package</description>
 		    <dependencies>
-			    <dependency id="Keycloak.Net" version="1.0.4" />
+			    <dependency id="Flurl.Http" version="2.4.2" />
 			    <dependency id="Newtonsoft.Json" version="12.0.2" />
 		    </dependencies>
     </metadata>
