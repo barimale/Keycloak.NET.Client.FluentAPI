@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Keycloak.NET.FluentAPI
@@ -20,7 +21,7 @@ namespace Keycloak.NET.FluentAPI
 
         public AccessTokenResponse Token { get; private set; }
 
-        public async Task<bool> InConfidentialWay(IConnectionSettings settings)
+        public async Task<bool> InConfidentialWay(IConnectionSettings settings, CancellationToken token)
         {
             try
             {
@@ -34,7 +35,7 @@ namespace Keycloak.NET.FluentAPI
                         new KeyValuePair<string, string>("username", settings.Username),
                         new KeyValuePair<string, string>("password", settings.Password),
                         new KeyValuePair<string, string>("client_id", settings.ClientName)
-                    })
+                    }, cancellationToken: token)
                     .ReceiveJson<AccessTokenResponse>();
 
                 return GetClaims(settings);
@@ -47,7 +48,7 @@ namespace Keycloak.NET.FluentAPI
 
         //TODO: expose just Login method and decide about strategy based on clientSecret field
 
-        public async Task<bool> InPublicWay(IConnectionSettings settings)
+        public async Task<bool> InPublicWay(IConnectionSettings settings, CancellationToken token)
         {
 
             try
@@ -61,7 +62,7 @@ namespace Keycloak.NET.FluentAPI
                                         new KeyValuePair<string, string>("username", settings.Username),
                                         new KeyValuePair<string, string>("password", settings.Password),
                                         new KeyValuePair<string, string>("client_id", settings.ClientName)
-                    })
+                    }, cancellationToken: token)
                     .ReceiveJson<AccessTokenResponse>();
 
                 return GetClaims(settings);
