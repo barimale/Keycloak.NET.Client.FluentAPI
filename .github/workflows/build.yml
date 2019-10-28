@@ -19,16 +19,16 @@ jobs:
       run: nuget sources Add -Name "GitHub" -Source "https://nuget.pkg.github.com/barimale/index.json" -UserName barimale -Password ${{ secrets.BARIMALE_TOKEN }}
       
     - name: Nuget Restore 
-      run: nuget restore .\Keycloak.NET.FluentAPI\Keycloak.NET.Client.FluentAPI.sln
+      run: nuget restore .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln
 
     - name: Build Solution 
-      run: dotnet build .\Keycloak.NET.FluentAPI\Keycloak.NET.Client.FluentAPI.sln --configuration Release
+      run: dotnet build .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln --configuration Release
 
    # - name: UT Run Tests 
-    #  run: dotnet test .\UT.Keycloak.NET.FluentAPI\UT.Keycloak.NET.Client.FluentAPI.csproj --configuration Release
+    #  run: dotnet test .\UT.Keycloak.NET.Client.FluentAPI\UT.Keycloak.NET.Client.FluentAPI.csproj --configuration Release
 
     - name: Nuget Pack
-      run: nuget pack .\Keycloak.NET.FluentAPI\pack.nuspec -Properties Configuration=Release -OutputDirectory .\nugetPackages
+      run: nuget pack .\Keycloak.NET.Client.FluentAPI\pack.nuspec -Properties Configuration=Release -OutputDirectory .\nugetPackages
       
     - name: Nuget Push
       run: nuget push .\nugetPackages\*.nupkg -Source GitHub 
