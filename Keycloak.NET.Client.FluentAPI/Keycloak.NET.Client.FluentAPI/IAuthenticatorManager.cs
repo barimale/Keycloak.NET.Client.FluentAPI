@@ -7,6 +7,7 @@ namespace Keycloak.NET.FluentAPI
 {
     public interface IAuthenticatorManager
     {
+        string UserId { get; }
         List<string> Entitlements { get; }
         AccessTokenResponse Token { get; }
 

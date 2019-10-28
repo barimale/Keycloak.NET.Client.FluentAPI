@@ -13,6 +13,8 @@ namespace Keycloak.NET.FluentAPI
 {
     public class AuthenticatorManager : IAuthenticatorManager
     {
+        public string UserId { get; private set; }
+
         public List<string> Entitlements { get; private set; } = new List<string>();
 
         public AccessTokenResponse Token { get; private set; }
@@ -75,6 +77,8 @@ namespace Keycloak.NET.FluentAPI
                 var handler = new JwtSecurityTokenHandler();
                 var jsonToken = handler.ReadJwtToken(stream);
                 var tokenS = handler.ReadToken(Token.token) as JwtSecurityToken;
+
+                UserId = tokenS.Claims.First(p => p.Type == "sub").Value;
 
                 var realmAccess = tokenS.Claims.First(p => p.Type == "realm_access").Value;
                 var realmRoles = JsonConvert.DeserializeObject<RealmRoles>(realmAccess);
