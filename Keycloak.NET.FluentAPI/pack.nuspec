@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+    <metadata>
+        <id>Keycloak.NET.FluentAPI</id>
+        <version>0.0.0.2</version>
+        <authors>barimale</authors>
+        <owners>barimale</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Fluent API for Keycloak.NET package</description>
+		    <dependencies>
+			    <dependency id="Keycloak.Net" version="1.0.4" />
+			    <dependency id="Newtonsoft.Json" version="12.0.2" />
+		    </dependencies>
+    </metadata>
+  <files>
+    <file src="Keycloak.NET.FluentAPI\bin\Release\netstandard2.0\Keycloak.NET.FluentAPI.dll" target="lib\netstandard2.0" />
+  </files>
+</package>

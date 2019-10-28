@@ -1,0 +1,34 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: actions/setup-dotnet@v1
+
+    - name: Setup Nuget
+      uses: warrenbuckley/Setup-Nuget@v1
+
+    - name: Nuget Add source 
+      run: nuget sources Add -Name "GitHub" -Source "https://nuget.pkg.github.com/barimale/index.json" -UserName barimale -Password ${{ secrets.BARIMALE_TOKEN }}
+      
+    - name: Nuget Restore 
+      run: nuget restore .\Keycloak.NET.FluentAPI\Keycloak.NET.FluentAPI.sln
+
+    - name: Build Solution 
+      run: dotnet build .\Keycloak.NET.FluentAPI\Keycloak.NET.FluentAPI.sln --configuration Release
+
+    - name: UT Run Tests 
+      run: dotnet test .\UT.Keycloak.NET.FluentAPI\UT.Keycloak.NET.FluentAPI.csproj --configuration Release
+
+    - name: Nuget Pack
+      run: nuget pack .\Keycloak.NET.FluentAPI\pack.nuspec -Properties Configuration=Release -OutputDirectory .\nugetPackages
+      
+    - name: Nuget Push
+      run: nuget push .\nugetPackages\*.nupkg -Source GitHub 

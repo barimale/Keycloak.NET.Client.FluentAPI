@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29418.71
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keycloak.NET.FluentAPI", "Keycloak.NET.FluentAPI\Keycloak.NET.FluentAPI.csproj", "{5318F08F-C01B-49C6-BC38-387522611338}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UT.Keycloak.NET.FluentAPI", "..\UT.Keycloak.NET.FluentAPI\UT.Keycloak.NET.FluentAPI.csproj", "{84D9FACE-3D5E-4065-8E9A-79C45CA77754}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1F91979B-6EFF-4726-842B-B72A8B56D135}"
+	ProjectSection(SolutionItems) = preProject
+		pack.nuspec = pack.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".workflows", ".workflows", "{808DA828-04AB-4B46-B18A-01E9399EEDA7}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\build.yml = ..\.github\workflows\build.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5318F08F-C01B-49C6-BC38-387522611338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5318F08F-C01B-49C6-BC38-387522611338}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5318F08F-C01B-49C6-BC38-387522611338}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5318F08F-C01B-49C6-BC38-387522611338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84D9FACE-3D5E-4065-8E9A-79C45CA77754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D9FACE-3D5E-4065-8E9A-79C45CA77754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D9FACE-3D5E-4065-8E9A-79C45CA77754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D9FACE-3D5E-4065-8E9A-79C45CA77754}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{808DA828-04AB-4B46-B18A-01E9399EEDA7} = {1F91979B-6EFF-4726-842B-B72A8B56D135}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8EE74894-2879-4F3E-934E-93404387B56D}
+	EndGlobalSection
+EndGlobal

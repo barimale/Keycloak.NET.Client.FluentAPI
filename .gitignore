@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Keycloak.NET.FluentAPI/.vs/Keycloak.NET.FluentAPI/v16
+/Keycloak.NET.FluentAPI/Keycloak.NET.FluentAPI/bin/Debug/netstandard2.0
+/Keycloak.NET.FluentAPI/Keycloak.NET.FluentAPI/obj
+/UT.Keycloak.NET.FluentAPI/bin/Debug/netcoreapp3.0
+/UT.Keycloak.NET.FluentAPI/obj
+/Keycloak.NET.FluentAPI/Keycloak.NET.FluentAPI/Keycloak.NET.FluentAPI.csproj.user
+bin
