@@ -28,7 +28,7 @@
             return this;
         }
 
-        Context IClient.Client(string clientName)
+        Context IClient.Public(string clientName)
         {
             _beingConstructed.ConnectionSettings.ClientName = clientName;
             return _beingConstructed;
@@ -39,7 +39,7 @@
             return _beingConstructed;
         }
 
-        Context IClient.Client(string id, string secret)
+        Context IClient.Confidential(string id, string secret)
         {
             _beingConstructed.ConnectionSettings.ClientName = id;
             _beingConstructed.ConnectionSettings.ClientSecret = secret;
@@ -66,7 +66,7 @@
 
     public interface IClient
     {
-        Context Client(string id);
-        Context Client(string id, string secret);
+        Context Public(string clientId);
+        Context Confidential(string clientId, string secret);
     }
 }

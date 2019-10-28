@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using Keycloak.NET.FluentAPI;
+using NUnit.Framework;
+using System.Threading.Tasks;
 
 namespace UT.Keycloak.NET.FluentAPI.As_a_user
 {
@@ -10,42 +12,25 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
             //intentionally left blank
         }
 
-        //[Test]
-        //public void I_d_like_to_have_all_my_entitlements_downloaded()
-        //{
-        //    //given
-        //    var service = new AuthenticatorManager(
-        //        InputData.Username, 
-        //        InputData.Password, 
-        //        InputData.Endpoint,
-        //        InputData.Realm,
-        //        InputData.ClientId,
-        //        InputData.ClientSecret);
+        [Test]
+        public async Task I_d_like_to_have_all_my_entitlements_downloaded()
+        {
+            //given
+            var service = new AuthenticatorManager();
 
-        //    //when
-        //    var result = service.AuthenticatePublic();
+            var confidentialContext = Context.Create()
+                .Credentials(InputData.Username, InputData.Password)
+                .Url(InputData.Endpoint)
+                .Realm(InputData.Realm)
+                .Confidential(InputData.ClientId, InputData.ClientSecret);
 
-        //    //than
-        //    Assert.IsTrue(result);
-        //}
+            //when
+            var result = await service.InConfidentialWay(confidentialContext.ConnectionSettings).ConfigureAwait(false);
 
-        //[Test]
-        //public void I_d_like_to_have_all_my_entitlements_downloaded_in_confidential_way()
-        //{
-        //    //given
-        //    var service = new AuthenticatorManager(
-        //        InputData.Username,
-        //        InputData.Password,
-        //        InputData.Endpoint,
-        //        InputData.Realm,
-        //        InputData.ClientId,
-        //        InputData.ClientSecret);
-
-        //    //when
-        //    var result = service.AuthenticateConfidential();
-
-        //    //than
-        //    Assert.IsTrue(result);
-        //}
+            //than
+            Assert.IsTrue(result);
+            Assert.Greater(service.Entitlements.Count, 0);
+            Assert.NotNull(service.Token);
+        }
     }
 }

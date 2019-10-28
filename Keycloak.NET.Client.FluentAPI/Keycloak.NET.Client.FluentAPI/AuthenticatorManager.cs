@@ -1,75 +1,69 @@
-﻿using Keycloak.NET.FluentAPI.Model;
+﻿using Flurl;
+using Flurl.Http;
+using Keycloak.NET.FluentAPI.Model;
 using Keycloak.NET.FluentAPI.Settings;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Net;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Keycloak.NET.FluentAPI
 {
-    public class AuthenticatorManager
+    public class AuthenticatorManager : IAuthenticatorManager
     {
-        public List<string> Entitlements = new List<string>();
+        public List<string> Entitlements { get; private set; } = new List<string>();
 
-        private AccessTokenResponse tokenResponse;
+        public AccessTokenResponse Token { get; private set; }
 
-        //TODO: extend builder -> choosing access type : public, confidential, bearer-only
-        //TODO: replace Webclient by Flurl
-        public bool AuthenticateConfidential(IConnectionSettings settings)
+        public async Task<bool> InConfidentialWay(IConnectionSettings settings)
         {
-            string endpoint = settings.Url + "auth/realms/" + settings.Realm + "/protocol/openid-connect/token";
-            string method = "POST";
-
-            using (WebClient wc = new WebClient())
+            try
             {
-                string credentials = Convert.ToBase64String(
-                    Encoding.ASCII.GetBytes(settings.ClientName + ":" + settings.ClientSecret));
-                wc.Headers[HttpRequestHeader.Authorization] = string.Format(
-                    "Basic {0}", credentials);
+                Token = await settings.Url
+                    .AppendPathSegment($"/auth/realms/{settings.Realm}/protocol/openid-connect/token")
+                    .WithHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .WithBasicAuth(settings.ClientName, settings.ClientSecret)
+                    .PostUrlEncodedAsync(new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("grant_type", "password"),
+                        new KeyValuePair<string, string>("username", settings.Username),
+                        new KeyValuePair<string, string>("password", settings.Password),
+                        new KeyValuePair<string, string>("client_id", settings.ClientName)
+                    })
+                    .ReceiveJson<AccessTokenResponse>();
 
-                wc.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-
-                try
-                {
-                    var data = "username=" + settings.Username + "&password=" + settings.Password + "&client_id=" + settings.ClientName + "&grant_type=password";
-
-                    string response = wc.UploadString(endpoint, method, data);
-
-                    tokenResponse = JsonConvert.DeserializeObject<AccessTokenResponse>(response);
-
-                    return GetClaims(settings);
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                return GetClaims(settings);
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
-        public bool AuthenticatePublic(IConnectionSettings settings)
+        public async Task<bool> InPublicWay(IConnectionSettings settings)
         {
-            string endpoint = settings.Url + "auth/realms/" + settings.Realm  + "/protocol/openid-connect/token";
-            string method = "POST";
 
-            using (WebClient wc = new WebClient())
+            try
             {
-                wc.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-                try
-                {
-                    var data = "username=" + settings.Username + "&password="+ settings.Password + "&client_id="+ settings.ClientName +"&grant_type=password";
-                    string response = wc.UploadString(endpoint, method, data);
+                Token = await settings.Url
+                    .AppendPathSegment($"/auth/realms/{settings.Realm}/protocol/openid-connect/token")
+                    .WithHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .PostUrlEncodedAsync(new List<KeyValuePair<string, string>>
+                    {
+                                        new KeyValuePair<string, string>("grant_type", "password"),
+                                        new KeyValuePair<string, string>("username", settings.Username),
+                                        new KeyValuePair<string, string>("password", settings.Password),
+                                        new KeyValuePair<string, string>("client_id", settings.ClientName)
+                    })
+                    .ReceiveJson<AccessTokenResponse>();
 
-                    tokenResponse = JsonConvert.DeserializeObject<AccessTokenResponse>(response);
-
-                    return GetClaims(settings);
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                return GetClaims(settings);
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -77,10 +71,10 @@ namespace Keycloak.NET.FluentAPI
         {
             try
             {
-                var stream = tokenResponse.token.ToString();
+                var stream = Token.token.ToString();
                 var handler = new JwtSecurityTokenHandler();
                 var jsonToken = handler.ReadJwtToken(stream);
-                var tokenS = handler.ReadToken(tokenResponse.token) as JwtSecurityToken;
+                var tokenS = handler.ReadToken(Token.token) as JwtSecurityToken;
 
                 var realmAccess = tokenS.Claims.First(p => p.Type == "realm_access").Value;
                 var realmRoles = JsonConvert.DeserializeObject<RealmRoles>(realmAccess);

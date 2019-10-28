@@ -21,13 +21,13 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_developer
                 .Credentials(InputData.Username, InputData.Password)
                 .Url(InputData.Endpoint)
                 .Realm(InputData.Realm)
-                .Client(InputData.ClientId);
+                .Public(InputData.ClientId);
 
             var confidentialContext = Context.Create()
                 .Credentials(InputData.Username, InputData.Password)
                 .Url(InputData.Endpoint)
                 .Realm(InputData.Realm)
-                .Client(InputData.ClientId, InputData.ClientSecret);
+                .Confidential(InputData.ClientId, InputData.ClientSecret);
 
             //than
             Assert.NotNull(publicContext);
