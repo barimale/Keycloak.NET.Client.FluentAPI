@@ -45,6 +45,8 @@ namespace Keycloak.NET.FluentAPI
             }
         }
 
+        //TODO: expose just Login method and decide about strategy based on clientSecret field
+
         public async Task<bool> InPublicWay(IConnectionSettings settings)
         {
 
