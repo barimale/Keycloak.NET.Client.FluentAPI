@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -82,6 +83,8 @@ namespace Keycloak.NET.FluentAPI
                 var jsonToken = handler.ReadJwtToken(stream);
                 var tokenS = handler.ReadToken(Token.token) as JwtSecurityToken;
 
+                Token.otherClaims = tokenS.Payload;
+
                 UserId = tokenS.Claims.First(p => p.Type == "sub").Value;
 
                 var realmAccess = tokenS.Claims.First(p => p.Type == "realm_access").Value;
@@ -94,7 +97,7 @@ namespace Keycloak.NET.FluentAPI
                 Entitlements.AddRange(realmRoles.Names);
                 Entitlements.AddRange(otherRoles.Names);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
