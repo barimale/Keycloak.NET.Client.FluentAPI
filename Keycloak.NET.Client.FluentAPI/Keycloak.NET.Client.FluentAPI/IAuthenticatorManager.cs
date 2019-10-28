@@ -8,7 +8,7 @@ namespace Keycloak.NET.FluentAPI
     public interface IAuthenticatorManager
     {
         string UserId { get; }
-        List<string> Entitlements { get; }
+        List<string> Priviligies { get; }
         AccessTokenResponse Token { get; }
         Task<bool> Authorize(IContext context, CancellationToken token = default);
     }

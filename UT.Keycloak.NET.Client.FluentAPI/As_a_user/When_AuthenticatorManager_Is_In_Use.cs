@@ -31,7 +31,7 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
 
             //than
             Assert.IsTrue(result);
-            Assert.Greater(service.Entitlements.Count, 0);
+            Assert.Greater(service.Priviligies.Count, 0);
             Assert.NotNull(service.Token);
         }
     }

@@ -16,7 +16,7 @@ namespace Keycloak.NET.FluentAPI
         //TODO: replace it by using Keycloak.Net.Models.Users
         public string UserId { get; private set; }
 
-        public List<string> Entitlements { get; private set; } = new List<string>();
+        public List<string> Priviligies { get; private set; } = new List<string>();
 
         public AccessTokenResponse Token { get; private set; }
 
@@ -109,8 +109,8 @@ namespace Keycloak.NET.FluentAPI
                 var resourceAccessDes = JsonConvert.DeserializeObject<Dictionary<string, RealmRoles>>(resourceAccess);
                 var otherRoles = resourceAccessDes.FirstOrDefault(p => p.Key == context.ConnectionSettings.ClientName).Value;
 
-                Entitlements.AddRange(realmRoles.Names);
-                Entitlements.AddRange(otherRoles.Names);
+                Priviligies.AddRange(realmRoles.Names);
+                Priviligies.AddRange(otherRoles.Names);
             }
             catch (Exception ex)
             {

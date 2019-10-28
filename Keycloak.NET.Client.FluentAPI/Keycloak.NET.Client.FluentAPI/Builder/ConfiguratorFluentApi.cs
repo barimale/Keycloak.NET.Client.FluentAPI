@@ -2,52 +2,52 @@
 {
     public class ContextFluentBuilder : ILoginAs, IUrl, IRealm, IClient
     {
-        private readonly Context _beingConstructed;
+        private readonly Context _context;
 
         public ContextFluentBuilder(Context beingConstructed)
         {
-            _beingConstructed = beingConstructed;
+            _context = beingConstructed;
         }
 
         IClient IRealm.Realm(string realmName)
         {
-            _beingConstructed.ConnectionSettings.Realm = realmName;
+            _context.ConnectionSettings.Realm = realmName;
             return this;
         }
 
         IUrl ILoginAs.Credentials(string username, string password)
         {
-            _beingConstructed.ConnectionSettings.Username = username;
-            _beingConstructed.ConnectionSettings.Password = password;
+            _context.ConnectionSettings.Username = username;
+            _context.ConnectionSettings.Password = password;
             return this;
         }
 
         IRealm IUrl.Url(string url)
         {
-            _beingConstructed.ConnectionSettings.Url = url;
+            _context.ConnectionSettings.Url = url;
             return this;
         }
 
         Context IClient.Public(string clientName)
         {
-            _beingConstructed.ConnectionSettings.ClientName = clientName;
-            _beingConstructed.ProtocolAccessType = AccessType.Public;
+            _context.ConnectionSettings.ClientName = clientName;
+            _context.ProtocolAccessType = AccessType.Public;
 
-            return _beingConstructed;
+            return _context;
         }
 
         Context IRealm.AllRealms()
         {
-            return _beingConstructed;
+            return _context;
         }
 
         Context IClient.Confidential(string id, string secret)
         {
-            _beingConstructed.ConnectionSettings.ClientName = id;
-            _beingConstructed.ConnectionSettings.ClientSecret = secret;
-            _beingConstructed.ProtocolAccessType = AccessType.Confidential;
+            _context.ConnectionSettings.ClientName = id;
+            _context.ConnectionSettings.ClientSecret = secret;
+            _context.ProtocolAccessType = AccessType.Confidential;
 
-            return _beingConstructed; ;
+            return _context; ;
         }
     }
 
