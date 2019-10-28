@@ -13,6 +13,7 @@ namespace Keycloak.NET.FluentAPI
 {
     public class AuthenticatorManager : IAuthenticatorManager
     {
+        //TODO: replace it by using Keycloak.Net.Models.Users
         public string UserId { get; private set; }
 
         public List<string> Entitlements { get; private set; } = new List<string>();
