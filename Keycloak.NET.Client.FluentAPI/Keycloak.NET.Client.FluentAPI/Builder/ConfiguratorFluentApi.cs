@@ -31,6 +31,8 @@
         Context IClient.Public(string clientName)
         {
             _beingConstructed.ConnectionSettings.ClientName = clientName;
+            _beingConstructed.ProtocolAccessType = AccessType.Public;
+
             return _beingConstructed;
         }
 
@@ -43,6 +45,7 @@
         {
             _beingConstructed.ConnectionSettings.ClientName = id;
             _beingConstructed.ConnectionSettings.ClientSecret = secret;
+            _beingConstructed.ProtocolAccessType = AccessType.Confidential;
 
             return _beingConstructed; ;
         }

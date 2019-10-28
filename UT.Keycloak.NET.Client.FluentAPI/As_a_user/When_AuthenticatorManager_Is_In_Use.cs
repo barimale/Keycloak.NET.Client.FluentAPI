@@ -25,7 +25,9 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
                 .Confidential(InputData.ClientId, InputData.ClientSecret);
 
             //when
-            var result = await service.InConfidentialWay(confidentialContext.ConnectionSettings).ConfigureAwait(false);
+            var result = await service
+                .Authorize(confidentialContext)
+                .ConfigureAwait(false);
 
             //than
             Assert.IsTrue(result);
