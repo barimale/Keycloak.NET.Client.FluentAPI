@@ -21,7 +21,7 @@ namespace Keycloak.NET.FluentAPI
 
         public AccessTokenResponse Token { get; private set; }
 
-        public async Task<bool> InConfidentialWay(IConnectionSettings settings, CancellationToken token)
+        public async Task<bool> InConfidentialWay(IConnectionSettings settings, CancellationToken token = default)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace Keycloak.NET.FluentAPI
 
         //TODO: expose just Login method and decide about strategy based on clientSecret field
 
-        public async Task<bool> InPublicWay(IConnectionSettings settings, CancellationToken token)
+        public async Task<bool> InPublicWay(IConnectionSettings settings, CancellationToken token = default)
         {
 
             try
