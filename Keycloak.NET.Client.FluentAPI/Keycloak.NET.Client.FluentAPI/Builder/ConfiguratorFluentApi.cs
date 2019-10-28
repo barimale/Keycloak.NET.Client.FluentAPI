@@ -12,6 +12,7 @@
         IClient IRealm.Realm(string realmName)
         {
             _context.ConnectionSettings.Realm = realmName;
+
             return this;
         }
 
@@ -19,12 +20,14 @@
         {
             _context.ConnectionSettings.Username = username;
             _context.ConnectionSettings.Password = password;
+
             return this;
         }
 
         IRealm IUrl.Url(string url)
         {
             _context.ConnectionSettings.Url = url;
+
             return this;
         }
 

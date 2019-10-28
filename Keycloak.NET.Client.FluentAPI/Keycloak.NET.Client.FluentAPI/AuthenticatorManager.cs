@@ -34,7 +34,7 @@ namespace Keycloak.NET.FluentAPI
                         throw new ArgumentException("Argument value not supported.", "ProtocolAccessType");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -83,7 +83,7 @@ namespace Keycloak.NET.FluentAPI
 
                 return GetClaims(context);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -111,13 +111,13 @@ namespace Keycloak.NET.FluentAPI
 
                 Priviligies.AddRange(realmRoles.Names);
                 Priviligies.AddRange(otherRoles.Names);
+
+                return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
-
-            return true;
         }
     }
 }
