@@ -24,8 +24,8 @@ jobs:
     - name: Build Solution 
       run: dotnet build .\Keycloak.NET.FluentAPI\Keycloak.NET.Client.FluentAPI.sln --configuration Release
 
-    - name: UT Run Tests 
-      run: dotnet test .\UT.Keycloak.NET.FluentAPI\UT.Keycloak.NET.Client.FluentAPI.csproj --configuration Release
+   # - name: UT Run Tests 
+    #  run: dotnet test .\UT.Keycloak.NET.FluentAPI\UT.Keycloak.NET.Client.FluentAPI.csproj --configuration Release
 
     - name: Nuget Pack
       run: nuget pack .\Keycloak.NET.FluentAPI\pack.nuspec -Properties Configuration=Release -OutputDirectory .\nugetPackages
