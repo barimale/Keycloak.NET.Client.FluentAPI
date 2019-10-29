@@ -8,23 +8,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@master
 
     - uses: actions/setup-dotnet@v1
-     with:
-        dotnet-version: 2.2.301
 
-    - name: Restore 
+    - name: Nuget Restore 
       run: dotnet restore .\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI.csproj
 
-    - name: Build 
+    - name: Build Solution 
       run: dotnet build .\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI.sln --configuration Release
 
    # - name: UT Run Tests 
     #  run: dotnet test .\UT.Keycloak.NET.Client.FluentAPI\UT.Keycloak.NET.Client.FluentAPI.csproj --configuration Release
 
-    - name: Pack
+    - name: Nuget Pack
       run: dotnet pack .\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI.csproj -p:NuspecFile=.\\Keycloak.NET.Client.FluentAPI\\pack.nuspec --configuration=Release --output .\\nugetPackages --no-build
       
-    - name: Push
+    - name: Nuget Push
       run: dotnet nuget push .\\nugetPackages\\*.nupkg --source https://nuget.pkg.github.com/barimale/index.json  --api-key ${{ secrets.BARIMALE_TOKEN }}
