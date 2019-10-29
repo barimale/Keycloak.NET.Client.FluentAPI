@@ -11,8 +11,6 @@ jobs:
     - uses: actions/checkout@master
 
     - uses: actions/setup-dotnet@v1
-    with:
-    dotnet-version: '2.2.108'
 
     - name: Restore 
       run: dotnet restore .\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI.csproj
