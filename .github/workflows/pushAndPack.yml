@@ -16,7 +16,7 @@ jobs:
       uses: warrenbuckley/Setup-Nuget@v1
 
     - name: Nuget Add source 
-      run: nuget sources Add -Name "GitHub" -Source "https://nuget.pkg.github.com/barimale/index.json" -UserName barimale -Password ${{ secrets.BARIMALE_TOKEN }}
+      run: nuget sources Add -Name "GitHub" -Source "https://nuget.pkg.github.com/barimale/index.json" -UserName barimale -Password ${{ secrets.GITHUB_TOKEN }}
       
     - name: Nuget Restore 
       run: nuget restore .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln
