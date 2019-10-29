@@ -5,26 +5,26 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
 
     steps:
     - uses: actions/checkout@master
 
     - uses: actions/setup-dotnet@v1
-        with:
-        dotnet-version: '2.2.103'
+    with:
+    dotnet-version: '2.2.103'
 
-    - name: Nuget Restore 
+    - name: Restore 
       run: dotnet restore .\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI.csproj
 
-    - name: Build Solution 
+    - name: Build 
       run: dotnet build .\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI.sln --configuration Release
 
    # - name: UT Run Tests 
     #  run: dotnet test .\UT.Keycloak.NET.Client.FluentAPI\UT.Keycloak.NET.Client.FluentAPI.csproj --configuration Release
 
-    - name: Nuget Pack
+    - name: Pack
       run: dotnet pack .\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI.csproj -p:NuspecFile=.\\Keycloak.NET.Client.FluentAPI\\pack.nuspec --configuration=Release --output .\\nugetPackages --no-build
       
-    - name: Nuget Push
+    - name: Push
       run: dotnet nuget push .\\nugetPackages\\*.nupkg --source https://nuget.pkg.github.com/barimale/index.json  --api-key ${{ secrets.BARIMALE_TOKEN }}
