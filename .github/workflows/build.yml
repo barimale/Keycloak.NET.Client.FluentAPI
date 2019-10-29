@@ -25,4 +25,4 @@ jobs:
       run: dotnet pack .\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI.csproj  --configuration=Release --output nugetPackages --no-build
       
     - name: Nuget Push
-      run: dotnet nuget push /home/runner/work/Keycloak.NET.Client.FluentAPI/Keycloak.NET.Client.FluentAPI/nugetPackages/*.nupkg --source https://nuget.pkg.github.com/barimale/index.json  --api-key ${{ secrets.BARIMALE_TOKEN }}
+      run: dotnet nuget push **/Keycloak.NET.Client.FluentAPI*.nupkg --source https://nuget.pkg.github.com/barimale/index.json  --api-key ${{ secrets.BARIMALE_TOKEN }}
