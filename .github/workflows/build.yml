@@ -11,6 +11,8 @@ jobs:
     - uses: actions/checkout@master
 
     - uses: actions/setup-dotnet@v1
+        with:
+        dotnet-version: '2.2.103'
 
     - name: Nuget Restore 
       run: dotnet restore .\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI.csproj
