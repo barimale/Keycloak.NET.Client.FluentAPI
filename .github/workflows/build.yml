@@ -22,7 +22,7 @@ jobs:
     #  run: dotnet test .\UT.Keycloak.NET.Client.FluentAPI\UT.Keycloak.NET.Client.FluentAPI.csproj --configuration Release
 
     - name: Nuget Pack
-      run: dotnet pack **/Keycloak.NET.Client.FluentAPI.csproj  -p:NuspecFile=**/pack.nuspec --configuration=Release --output nugetPackages --no-build
+      run: dotnet pack .\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI.csproj  --version-suffix alpha-*  --configuration=Release --output nugetPackages --no-build
       
     - name: Nuget Push
       run: dotnet nuget push **/Keycloak.NET.Client.FluentAPI*.nupkg --source https://nuget.pkg.github.com/barimale/index.json  --api-key ${{ secrets.BARIMALE_TOKEN }}
