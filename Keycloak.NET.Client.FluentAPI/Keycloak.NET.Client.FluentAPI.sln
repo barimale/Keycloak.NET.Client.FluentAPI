@@ -6,11 +6,13 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1F91979B-6EFF-4726-842B-B72A8B56D135}"
 	ProjectSection(SolutionItems) = preProject
 		pack.nuspec = pack.nuspec
+		..\Keycloak.NET.Client.Scripts\realm-export.json = ..\Keycloak.NET.Client.Scripts\realm-export.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".workflows", ".workflows", "{808DA828-04AB-4B46-B18A-01E9399EEDA7}"
 	ProjectSection(SolutionItems) = preProject
-		..\.github\workflows\build.yml = ..\.github\workflows\build.yml
+		..\.github\workflows\buildAndTest.yml = ..\.github\workflows\buildAndTest.yml
+		..\.github\workflows\pushAndPack.yml = ..\.github\workflows\pushAndPack.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keycloak.NET.Client.FluentAPI", "Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.csproj", "{E06CCDC4-7B00-4183-A734-9116E56BA94E}"
