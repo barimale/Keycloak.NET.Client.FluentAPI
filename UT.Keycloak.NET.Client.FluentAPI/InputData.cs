@@ -8,5 +8,6 @@
         public static string Realm = "DEV";
         public static string ClientId = "soundManager-WPF";
         public static string ClientSecret = "5972fab4-4f59-4aab-967f-9f24f81f14c2";
+        public static string PublicClientId = "publicAccessType";
     }
 }

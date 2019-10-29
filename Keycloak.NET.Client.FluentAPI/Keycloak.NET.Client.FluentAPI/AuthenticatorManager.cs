@@ -20,6 +20,8 @@ namespace Keycloak.NET.FluentAPI
 
         public AccessTokenResponse Token { get; private set; }
 
+        public event EventHandler OnSessionExpired;
+
         public async Task<bool> Authorize(IContext context, CancellationToken token = default)
         {
             try
@@ -30,6 +32,8 @@ namespace Keycloak.NET.FluentAPI
                         return await InConfidentialWay(context, token);
                     case AccessType.Public:
                         return await InPublicWay(context, token);
+                    case AccessType.Bearer_only:
+                        return await InServiceWay(context, token);
                     default:
                         throw new ArgumentException("Argument value not supported.", "ProtocolAccessType");
                 }
@@ -39,6 +43,32 @@ namespace Keycloak.NET.FluentAPI
                 throw;
             }
         }
+
+        private async Task<bool> InServiceWay(IContext context, CancellationToken token = default)
+        {
+            try
+            {
+                Token = await context.ConnectionSettings.Url
+                    .AppendPathSegment($"/auth/realms/{context.ConnectionSettings.Realm}/protocol/openid-connect/token")
+                    .WithHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .WithBasicAuth(context.ConnectionSettings.ClientName, context.ConnectionSettings.ClientSecret)
+                    .PostUrlEncodedAsync(new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("grant_type", "password"),
+                        new KeyValuePair<string, string>("username", context.ConnectionSettings.Username),
+                        new KeyValuePair<string, string>("password", context.ConnectionSettings.Password),
+                        new KeyValuePair<string, string>("client_id", context.ConnectionSettings.ClientName)
+                    }, cancellationToken: token)
+                    .ReceiveJson<AccessTokenResponse>();
+
+                return GetClaims(context);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         private async Task<bool> InConfidentialWay(IContext context, CancellationToken token = default)
         {
             try
@@ -109,8 +139,11 @@ namespace Keycloak.NET.FluentAPI
                 var resourceAccessDes = JsonConvert.DeserializeObject<Dictionary<string, RealmRoles>>(resourceAccess);
                 var otherRoles = resourceAccessDes.FirstOrDefault(p => p.Key == context.ConnectionSettings.ClientName).Value;
 
-                Priviligies.AddRange(realmRoles.Names);
-                Priviligies.AddRange(otherRoles.Names);
+                if(realmRoles!=null)
+                    Priviligies.AddRange(realmRoles.Names);
+
+                if (otherRoles != null)
+                    Priviligies.AddRange(otherRoles.Names);
 
                 return true;
             }
