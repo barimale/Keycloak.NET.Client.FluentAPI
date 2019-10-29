@@ -46,27 +46,7 @@ namespace Keycloak.NET.FluentAPI
 
         private async Task<bool> InServiceWay(IContext context, CancellationToken token = default)
         {
-            try
-            {
-                Token = await context.ConnectionSettings.Url
-                    .AppendPathSegment($"/auth/realms/{context.ConnectionSettings.Realm}/protocol/openid-connect/token")
-                    .WithHeader("Content-Type", "application/x-www-form-urlencoded")
-                    .WithBasicAuth(context.ConnectionSettings.ClientName, context.ConnectionSettings.ClientSecret)
-                    .PostUrlEncodedAsync(new List<KeyValuePair<string, string>>
-                    {
-                        new KeyValuePair<string, string>("grant_type", "password"),
-                        new KeyValuePair<string, string>("username", context.ConnectionSettings.Username),
-                        new KeyValuePair<string, string>("password", context.ConnectionSettings.Password),
-                        new KeyValuePair<string, string>("client_id", context.ConnectionSettings.ClientName)
-                    }, cancellationToken: token)
-                    .ReceiveJson<AccessTokenResponse>();
-
-                return GetClaims(context);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         private async Task<bool> InConfidentialWay(IContext context, CancellationToken token = default)

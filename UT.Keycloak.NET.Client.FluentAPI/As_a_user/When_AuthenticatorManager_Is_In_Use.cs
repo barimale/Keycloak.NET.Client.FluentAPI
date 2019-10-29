@@ -18,7 +18,7 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
             //given
             var service = new AuthenticatorManager();
 
-            var confidentialContext = Context.Create()
+            var context = Context.Create()
                 .Credentials(InputData.Username, InputData.Password)
                 .Url(InputData.Endpoint)
                 .Realm(InputData.Realm)
@@ -26,7 +26,7 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
 
             //when
             var result = await service
-                .Authorize(confidentialContext)
+                .Authorize(context)
                 .ConfigureAwait(false);
 
             //than
@@ -41,7 +41,7 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
             //given
             var service = new AuthenticatorManager();
 
-            var confidentialContext = Context.Create()
+            var context = Context.Create()
                 .Credentials(InputData.Username, InputData.Password)
                 .Url(InputData.Endpoint)
                 .Realm(InputData.Realm)
@@ -49,7 +49,30 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
 
             //when
             var result = await service
-                .Authorize(confidentialContext)
+                .Authorize(context)
+                .ConfigureAwait(false);
+
+            //than
+            Assert.IsTrue(result);
+            Assert.Greater(service.Priviligies.Count, 0);
+            Assert.NotNull(service.Token);
+        }
+
+        [Test]
+        public async Task I_d_like_to_have_all_my_entitlements_downloaded_by_using_bearer_only_access_type()
+        {
+            //given
+            var service = new AuthenticatorManager();
+
+            var context = Context.Create()
+                .Credentials(InputData.Username, InputData.Password)
+                .Url(InputData.Endpoint)
+                .Realm(InputData.Realm)
+                .BearerOnly(InputData.BearerOnlyClientId, InputData.BearerOnlyClientSecret);
+
+            //when
+            var result = await service
+                .Authorize(context)
                 .ConfigureAwait(false);
 
             //than

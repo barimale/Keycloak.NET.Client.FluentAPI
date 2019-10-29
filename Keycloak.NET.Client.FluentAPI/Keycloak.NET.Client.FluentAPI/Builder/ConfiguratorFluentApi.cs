@@ -50,7 +50,16 @@
             _context.ConnectionSettings.ClientSecret = secret;
             _context.ProtocolAccessType = AccessType.Confidential;
 
-            return _context; ;
+            return _context;
+        }
+
+        Context IClient.BearerOnly(string clientId, string secret)
+        {
+            _context.ConnectionSettings.ClientName = clientId;
+            _context.ConnectionSettings.ClientSecret = secret;
+            _context.ProtocolAccessType = AccessType.Bearer_only;
+
+            return _context;
         }
     }
 
@@ -74,5 +83,6 @@
     {
         Context Public(string clientId);
         Context Confidential(string clientId, string secret);
+        Context BearerOnly(string clientId, string secret);
     }
 }
