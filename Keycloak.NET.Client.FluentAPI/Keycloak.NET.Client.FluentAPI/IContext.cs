@@ -4,14 +4,15 @@ namespace Keycloak.NET.FluentAPI
 {
     public interface IContext
     {
+        string CertificatePath { get; set; }
         AccessType ProtocolAccessType { get; set; }
         IConnectionSettings ConnectionSettings { get; }
-    }
 
-    public enum AccessType
-    {
-        Public,
-        Confidential,
-        Bearer_only
+        enum AccessType
+        {
+            Public,
+            Confidential,
+            Bearer_only
+        }
     }
 }

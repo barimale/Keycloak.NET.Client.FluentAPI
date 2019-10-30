@@ -5,7 +5,8 @@ namespace Keycloak.NET.FluentAPI
 {
     public class Context : IContext
     {
-        public AccessType ProtocolAccessType { get; set; }
+        public string CertificatePath { get; set; }
+        public IContext.AccessType ProtocolAccessType { get; set; }
         public IConnectionSettings ConnectionSettings { get; private set; } = new ConnectionSettings();
 
         private Context()

@@ -21,18 +21,21 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_developer
                 .Credentials(InputData.Username, InputData.Password)
                 .Url(InputData.Endpoint)
                 .Realm(InputData.Realm)
+                .OpenIdConnect()
                 .Public(InputData.ClientId);
 
             var confidentialContext = Context.Create()
                 .Credentials(InputData.Username, InputData.Password)
                 .Url(InputData.Endpoint)
                 .Realm(InputData.Realm)
+                .OpenIdConnect()
                 .Confidential(InputData.ClientId, InputData.ClientSecret);
 
             var bearerOnlyContext = Context.Create()
                 .Credentials(InputData.Username, InputData.Password)
                 .Url(InputData.Endpoint)
                 .Realm(InputData.Realm)
+                .OpenIdConnect()
                 .BearerOnly(InputData.ClientId, InputData.ClientSecret);
 
             //than

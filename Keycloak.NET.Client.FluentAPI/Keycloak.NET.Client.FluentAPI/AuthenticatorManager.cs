@@ -20,7 +20,6 @@ namespace Keycloak.NET.FluentAPI
 
         public AccessTokenResponse Token { get; private set; }
 
-        public event EventHandler OnSessionExpired;
 
         public async Task<bool> Authorize(IContext context, CancellationToken token = default)
         {
@@ -28,11 +27,11 @@ namespace Keycloak.NET.FluentAPI
             {
                 switch (context.ProtocolAccessType)
                 {
-                    case AccessType.Confidential:
+                    case IContext.AccessType.Confidential:
                         return await InConfidentialWay(context, token);
-                    case AccessType.Public:
+                    case IContext.AccessType.Public:
                         return await InPublicWay(context, token);
-                    case AccessType.Bearer_only:
+                    case IContext.AccessType.Bearer_only:
                         return await InServiceWay(context, token);
                     default:
                         throw new ArgumentException("Argument value not supported.", "ProtocolAccessType");

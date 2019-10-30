@@ -22,6 +22,7 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
                 .Credentials(InputData.Username, InputData.Password)
                 .Url(InputData.Endpoint)
                 .Realm(InputData.Realm)
+                .OpenIdConnect()
                 .Confidential(InputData.ClientId, InputData.ClientSecret);
 
             //when
@@ -45,6 +46,7 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
                 .Credentials(InputData.Username, InputData.Password)
                 .Url(InputData.Endpoint)
                 .Realm(InputData.Realm)
+                .OpenIdConnect()
                 .Public(InputData.PublicClientId);
 
             //when
@@ -68,6 +70,7 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
                 .Credentials(InputData.Username, InputData.Password)
                 .Url(InputData.Endpoint)
                 .Realm(InputData.Realm)
+                .OpenIdConnect()
                 .BearerOnly(InputData.BearerOnlyClientId, InputData.BearerOnlyClientSecret);
 
             //when
@@ -79,6 +82,22 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
             Assert.IsTrue(result);
             Assert.Greater(service.Priviligies.Count, 0);
             Assert.NotNull(service.Token);
+        }
+
+        public void I_d_like_to_have_context_with_saml_configuration()
+        {
+            //given
+
+            //when
+            var context = Context.Create()
+                .Credentials(InputData.Username, InputData.Password)
+                .Url(InputData.Endpoint)
+                .Realm(InputData.Realm)
+                .Saml()
+                .Certificate(string.Empty);
+
+            //than
+            Assert.NotNull(context);
         }
     }
 }

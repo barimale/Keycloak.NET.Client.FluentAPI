@@ -1,6 +1,6 @@
 ﻿namespace Keycloak.NET.FluentAPI.Builder
 {
-    public class ContextFluentBuilder : ILoginAs, IUrl, IRealm, IClient
+    public class ContextFluentBuilder : ILoginAs, IUrl, IRealm, IClient, IProtocol, ISamlClient
     {
         private readonly Context _context;
 
@@ -9,7 +9,7 @@
             _context = beingConstructed;
         }
 
-        IClient IRealm.Realm(string realmName)
+        IProtocol IRealm.Realm(string realmName)
         {
             _context.ConnectionSettings.Realm = realmName;
 
@@ -34,7 +34,7 @@
         Context IClient.Public(string clientName)
         {
             _context.ConnectionSettings.ClientName = clientName;
-            _context.ProtocolAccessType = AccessType.Public;
+            _context.ProtocolAccessType = IContext.AccessType.Public;
 
             return _context;
         }
@@ -48,7 +48,7 @@
         {
             _context.ConnectionSettings.ClientName = id;
             _context.ConnectionSettings.ClientSecret = secret;
-            _context.ProtocolAccessType = AccessType.Confidential;
+            _context.ProtocolAccessType = IContext.AccessType.Confidential;
 
             return _context;
         }
@@ -57,7 +57,24 @@
         {
             _context.ConnectionSettings.ClientName = clientId;
             _context.ConnectionSettings.ClientSecret = secret;
-            _context.ProtocolAccessType = AccessType.Bearer_only;
+            _context.ProtocolAccessType = IContext.AccessType.Bearer_only;
+
+            return _context;
+        }
+
+        IClient IProtocol.OpenIdConnect()
+        {
+            return this;
+        }
+
+        ISamlClient IProtocol.Saml()
+        {
+            return this;
+        }
+
+        Context ISamlClient.Certificate(string pathToFile)
+        {
+            _context.CertificatePath = pathToFile;
 
             return _context;
         }
@@ -75,8 +92,19 @@
 
     public interface IRealm
     {
-        IClient Realm(string realmName);
+        IProtocol Realm(string realmName);
         Context AllRealms();
+    }
+
+    public interface IProtocol
+    {
+        IClient OpenIdConnect();
+        ISamlClient Saml();
+    }
+
+    public interface ISamlClient
+    {
+        Context Certificate(string pathToFile);
     }
 
     public interface IClient
