@@ -64,11 +64,15 @@
 
         IClient IProtocol.OpenIdConnect()
         {
+            _context.ProtocolType = IContext.ClientProtocolType.openIdConnect;
+
             return this;
         }
 
         ISamlClient IProtocol.Saml()
         {
+            _context.ProtocolType = IContext.ClientProtocolType.saml;
+
             return this;
         }
 

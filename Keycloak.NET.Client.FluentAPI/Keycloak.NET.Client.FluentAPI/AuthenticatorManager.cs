@@ -25,22 +25,40 @@ namespace Keycloak.NET.FluentAPI
         {
             try
             {
-                switch (context.ProtocolAccessType)
+                switch(context.ProtocolType)
                 {
-                    case IContext.AccessType.Confidential:
-                        return await InConfidentialWay(context, token);
-                    case IContext.AccessType.Public:
-                        return await InPublicWay(context, token);
-                    case IContext.AccessType.Bearer_only:
-                        return await InServiceWay(context, token);
+                    case IContext.ClientProtocolType.openIdConnect:
+                        return await UsingOpenIdConnect(context, token);
+                    case IContext.ClientProtocolType.saml:
+                        return await UsingSaml(context, token);
                     default:
-                        throw new ArgumentException("Argument value not supported.", "ProtocolAccessType");
+                        throw new ArgumentException("Argument value not supported.", "ProtocolType");
                 }
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+
+        private async Task<bool> UsingOpenIdConnect(IContext context, CancellationToken token)
+        {
+            switch (context.ProtocolAccessType)
+            {
+                case IContext.AccessType.Confidential:
+                    return await InConfidentialWay(context, token);
+                case IContext.AccessType.Public:
+                    return await InPublicWay(context, token);
+                case IContext.AccessType.Bearer_only:
+                    return await InServiceWay(context, token);
+                default:
+                    throw new ArgumentException("Argument value not supported.", "ProtocolAccessType");
+            }
+        }
+
+        private async Task<bool> UsingSaml(IContext context, CancellationToken token = default)
+        {
+            throw new NotImplementedException();
         }
 
         private async Task<bool> InServiceWay(IContext context, CancellationToken token = default)
