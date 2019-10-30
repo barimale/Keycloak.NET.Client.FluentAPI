@@ -29,9 +29,16 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_developer
                 .Realm(InputData.Realm)
                 .Confidential(InputData.ClientId, InputData.ClientSecret);
 
+            var bearerOnlyContext = Context.Create()
+                .Credentials(InputData.Username, InputData.Password)
+                .Url(InputData.Endpoint)
+                .Realm(InputData.Realm)
+                .BearerOnly(InputData.ClientId, InputData.ClientSecret);
+
             //than
             Assert.NotNull(publicContext);
             Assert.NotNull(confidentialContext);
+            Assert.NotNull(bearerOnlyContext);
         }
     }
 }
