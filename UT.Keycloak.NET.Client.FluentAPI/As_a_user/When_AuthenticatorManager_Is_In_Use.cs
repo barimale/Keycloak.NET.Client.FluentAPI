@@ -32,7 +32,8 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
 
             //than
             Assert.IsTrue(result);
-            Assert.Greater(service.Priviligies.Count, 0);
+            Assert.Greater(service.PriviligiesAsListOfNames().Count, 0);
+            Assert.Greater(service.PriviligiesAsListOfRoles().Count, 0);
             Assert.NotNull(service.Token);
         }
 
@@ -56,7 +57,8 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
 
             //than
             Assert.IsTrue(result);
-            Assert.Greater(service.Priviligies.Count, 0);
+            Assert.Greater(service.PriviligiesAsListOfNames().Count, 0);
+            Assert.Greater(service.PriviligiesAsListOfRoles().Count, 0);
             Assert.NotNull(service.Token);
         }
 
@@ -80,7 +82,8 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
 
             //than
             Assert.IsTrue(result);
-            Assert.Greater(service.Priviligies.Count, 0);
+            Assert.Greater(service.PriviligiesAsListOfNames().Count, 0);
+            Assert.Greater(service.PriviligiesAsListOfRoles().Count, 0);
             Assert.NotNull(service.Token);
         }
 

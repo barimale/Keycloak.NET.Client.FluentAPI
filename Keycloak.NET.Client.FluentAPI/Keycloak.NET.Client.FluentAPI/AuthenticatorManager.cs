@@ -1,9 +1,11 @@
 ﻿using Flurl;
 using Flurl.Http;
+using Keycloak.Net.Models.Roles;
 using Keycloak.NET.FluentAPI.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading;
@@ -13,10 +15,9 @@ namespace Keycloak.NET.FluentAPI
 {
     public class AuthenticatorManager : IAuthenticatorManager
     {
-        //TODO: replace it by using Keycloak.Net.Models.Users
-        public string UserId { get; private set; }
+        public Net.Models.Users.User User { get; private set; }
 
-        public List<string> Priviligies { get; private set; } = new List<string>();
+        private readonly List<string> Priviligies = new List<string>();
 
         public AccessTokenResponse Token { get; private set; }
 
@@ -93,7 +94,6 @@ namespace Keycloak.NET.FluentAPI
 
         private async Task<bool> InPublicWay(IContext context, CancellationToken token = default)
         {
-
             try
             {
                 Token = await context.ConnectionSettings.Url
@@ -127,7 +127,11 @@ namespace Keycloak.NET.FluentAPI
 
                 Token.otherClaims = tokenS.Payload;
 
-                UserId = tokenS.Claims.First(p => p.Type == "sub").Value;
+                var userId = tokenS.Claims.First(p => p.Type == "sub").Value;
+                User = new Net.Models.Users.User()
+                {
+                    Id = userId
+                };
 
                 var realmAccess = tokenS.Claims.First(p => p.Type == "realm_access").Value;
                 var realmRoles = JsonConvert.DeserializeObject<RealmRoles>(realmAccess);
@@ -148,6 +152,22 @@ namespace Keycloak.NET.FluentAPI
             {
                 throw;
             }
+        }
+
+        public ImmutableList<string> PriviligiesAsListOfNames()
+        {
+            return Priviligies.ToImmutableList();
+        }
+
+        public ImmutableList<Role> PriviligiesAsListOfRoles()
+        {
+           return Priviligies.Select(p =>
+            {
+                return new Role
+                {
+                    Name = p
+                };
+            }).ToImmutableList();
         }
     }
 }
