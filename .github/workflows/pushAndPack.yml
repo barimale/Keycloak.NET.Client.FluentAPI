@@ -21,8 +21,8 @@ jobs:
     - name: Nuget Restore 
       run: nuget restore .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln
 
-    - name: Build Solution for Net47
-      run: dotnet build .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln --configuration Release --framework net47
+ #   - name: Build Solution for Net47
+ #     run: dotnet build .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln --configuration Release --framework net47
 
     - name: Build Solution for Standard 2.1
       run: dotnet build .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln --configuration Release
