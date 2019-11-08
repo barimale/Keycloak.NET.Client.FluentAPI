@@ -21,11 +21,11 @@ jobs:
     - name: Nuget Restore 
       run: nuget restore .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln
 
+    - name: Build Solution for Net47
+      run: dotnet build .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln --configuration Release --framework net47
+
     - name: Build Solution for Standard 2.1
       run: dotnet build .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln --configuration Release
-
-    - name: Build Solution for Net47
-      run: dotnet build .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln --configuration Release --framework net47 --output .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI\bin\Release\net47\  --force
 
     - name: Nuget Pack
       run: nuget pack .\Keycloak.NET.Client.FluentAPI\pack.nuspec -Properties Configuration=Release -OutputDirectory .\nugetPackages
