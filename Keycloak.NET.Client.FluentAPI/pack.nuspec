@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
 		<metadata>
 				<id>Keycloak.NET.Client.FluentAPI</id>
-				<version>1.0.0.4</version>
+				<version>1.0.0.5</version>
 				<authors>barimale</authors>
 				<owners>barimale</owners>
 				<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -18,7 +18,7 @@
 				</dependencies>
 		</metadata>
 	<files>
-		<file src="Keycloak.NET.Client.FluentAPI\bin\Release\netstandard2.1\Keycloak.NET.Client.FluentAPI.dll" target="lib\netstandard2.1" />
+		<file src="Keycloak.NET.Client.FluentAPI\bin\Release\netstandard2.0\Keycloak.NET.Client.FluentAPI.dll" target="lib\netstandard2.0" />
 		<file src="Keycloak.NET.Client.FluentAPI\bin\Release\net47\Keycloak.NET.Client.FluentAPI.dll" target="lib\net47" />
 	</files>
 </package>
