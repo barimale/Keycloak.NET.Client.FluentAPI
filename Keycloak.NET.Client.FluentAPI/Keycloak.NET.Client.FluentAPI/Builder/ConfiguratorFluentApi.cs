@@ -34,7 +34,7 @@
         Context IClient.Public(string clientName)
         {
             _context.ConnectionSettings.ClientName = clientName;
-            _context.ProtocolAccessType = IContext.AccessType.Public;
+            _context.ProtocolAccessType = AccessType.Public;
 
             return _context;
         }
@@ -48,7 +48,7 @@
         {
             _context.ConnectionSettings.ClientName = id;
             _context.ConnectionSettings.ClientSecret = secret;
-            _context.ProtocolAccessType = IContext.AccessType.Confidential;
+            _context.ProtocolAccessType = AccessType.Confidential;
 
             return _context;
         }
@@ -57,21 +57,21 @@
         {
             _context.ConnectionSettings.ClientName = clientId;
             _context.ConnectionSettings.ClientSecret = secret;
-            _context.ProtocolAccessType = IContext.AccessType.Bearer_only;
+            _context.ProtocolAccessType = AccessType.Bearer_only;
 
             return _context;
         }
 
         IClient IProtocol.OpenIdConnect()
         {
-            _context.ProtocolType = IContext.ClientProtocolType.openIdConnect;
+            _context.ProtocolType = ClientProtocolType.openIdConnect;
 
             return this;
         }
 
         ISamlClient IProtocol.Saml()
         {
-            _context.ProtocolType = IContext.ClientProtocolType.saml;
+            _context.ProtocolType = ClientProtocolType.saml;
 
             return this;
         }

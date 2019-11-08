@@ -28,9 +28,9 @@ namespace Keycloak.NET.FluentAPI
             {
                 switch(context.ProtocolType)
                 {
-                    case IContext.ClientProtocolType.openIdConnect:
+                    case ClientProtocolType.openIdConnect:
                         return UsingOpenIdConnectAsync(context, token);
-                    case IContext.ClientProtocolType.saml:
+                    case ClientProtocolType.saml:
                         return UsingSamlAsync(context, token);
                     default:
                         throw new ArgumentException("Argument value not supported.", "ProtocolType");
@@ -46,11 +46,11 @@ namespace Keycloak.NET.FluentAPI
         {
             switch (context.ProtocolAccessType)
             {
-                case IContext.AccessType.Confidential:
+                case AccessType.Confidential:
                     return InConfidentialWayAsync(context, token);
-                case IContext.AccessType.Public:
+                case AccessType.Public:
                     return InPublicWayAsync(context, token);
-                case IContext.AccessType.Bearer_only:
+                case AccessType.Bearer_only:
                     return InServiceWayAsync(context, token);
                 default:
                     throw new ArgumentException("Argument value not supported.", "ProtocolAccessType");

@@ -8,18 +8,17 @@ namespace Keycloak.NET.FluentAPI
         AccessType ProtocolAccessType { get; set; }
         ClientProtocolType ProtocolType { get; set; }
         IConnectionSettings ConnectionSettings { get; }
+    }
+    public enum ClientProtocolType
+    {
+        openIdConnect,
+        saml
+    }
 
-        enum ClientProtocolType
-        {
-            openIdConnect,
-            saml
-        }
-
-        enum AccessType
-        {
-            Public,
-            Confidential,
-            Bearer_only
-        }
+    public enum AccessType
+    {
+        Public,
+        Confidential,
+        Bearer_only
     }
 }
