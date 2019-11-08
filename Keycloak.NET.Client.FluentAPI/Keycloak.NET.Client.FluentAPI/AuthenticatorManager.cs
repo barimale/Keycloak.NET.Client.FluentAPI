@@ -22,16 +22,16 @@ namespace Keycloak.NET.FluentAPI
         public AccessTokenResponse Token { get; private set; }
 
 
-        public async Task<bool> Authorize(IContext context, CancellationToken token = default)
+        public Task<bool> Authorize(IContext context, CancellationToken token = default)
         {
             try
             {
                 switch(context.ProtocolType)
                 {
                     case IContext.ClientProtocolType.openIdConnect:
-                        return await UsingOpenIdConnectAsync(context, token);
+                        return UsingOpenIdConnectAsync(context, token);
                     case IContext.ClientProtocolType.saml:
-                        return await UsingSamlAsync(context, token);
+                        return UsingSamlAsync(context, token);
                     default:
                         throw new ArgumentException("Argument value not supported.", "ProtocolType");
                 }
