@@ -29,9 +29,9 @@ namespace Keycloak.NET.FluentAPI
                 switch(context.ProtocolType)
                 {
                     case IContext.ClientProtocolType.openIdConnect:
-                        return await UsingOpenIdConnect(context, token);
+                        return await UsingOpenIdConnectAsync(context, token);
                     case IContext.ClientProtocolType.saml:
-                        return await UsingSaml(context, token);
+                        return await UsingSamlAsync(context, token);
                     default:
                         throw new ArgumentException("Argument value not supported.", "ProtocolType");
                 }
@@ -42,32 +42,32 @@ namespace Keycloak.NET.FluentAPI
             }
         }
 
-        private async Task<bool> UsingOpenIdConnect(IContext context, CancellationToken token)
+        private Task<bool> UsingOpenIdConnectAsync(IContext context, CancellationToken token)
         {
             switch (context.ProtocolAccessType)
             {
                 case IContext.AccessType.Confidential:
-                    return await InConfidentialWay(context, token);
+                    return InConfidentialWayAsync(context, token);
                 case IContext.AccessType.Public:
-                    return await InPublicWay(context, token);
+                    return InPublicWayAsync(context, token);
                 case IContext.AccessType.Bearer_only:
-                    return await InServiceWay(context, token);
+                    return InServiceWayAsync(context, token);
                 default:
                     throw new ArgumentException("Argument value not supported.", "ProtocolAccessType");
             }
         }
 
-        private async Task<bool> UsingSaml(IContext context, CancellationToken token = default)
+        private async Task<bool> UsingSamlAsync(IContext context, CancellationToken token = default)
         {
             throw new NotImplementedException();
         }
 
-        private async Task<bool> InServiceWay(IContext context, CancellationToken token = default)
+        private async Task<bool> InServiceWayAsync(IContext context, CancellationToken token = default)
         {
             throw new NotImplementedException();
         }
 
-        private async Task<bool> InConfidentialWay(IContext context, CancellationToken token = default)
+        private async Task<bool> InConfidentialWayAsync(IContext context, CancellationToken token = default)
         {
             try
             {
@@ -92,7 +92,7 @@ namespace Keycloak.NET.FluentAPI
             }
         }
 
-        private async Task<bool> InPublicWay(IContext context, CancellationToken token = default)
+        private async Task<bool> InPublicWayAsync(IContext context, CancellationToken token = default)
         {
             try
             {
