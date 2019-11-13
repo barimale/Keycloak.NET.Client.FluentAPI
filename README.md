@@ -1,6 +1,7 @@
 # Keycloak.NET.Client.FluentAPI
 1. Context builder examples:
 
+```
 	var publicContext = Context.Create()
 		.Credentials(InputData.Username, InputData.Password)
 		.Url(InputData.Endpoint)
@@ -21,9 +22,10 @@
 		.Realm(InputData.Realm)
 		.OpenIdConnect()
 		.BearerOnly(InputData.ClientId, InputData.ClientSecret);
+```
 
 2. Manager usage examples: 
-
+```
 	//given manager
 	var service = new AuthorizationManager();
 
@@ -45,3 +47,4 @@
 	Assert.Greater(service.PriviligiesAsListOfNames().Count, 0);
 	Assert.Greater(service.PriviligiesAsListOfRoles().Count, 0);
 	Assert.NotNull(service.Token);
+```
