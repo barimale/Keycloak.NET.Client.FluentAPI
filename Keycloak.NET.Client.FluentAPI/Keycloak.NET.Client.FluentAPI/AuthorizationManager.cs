@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Keycloak.NET.FluentAPI
 {
-    public class AuthenticatorManager : IAuthenticatorManager
+    public class AuthorizationManager : IManager
     {
         public Net.Models.Users.User User { get; private set; }
 

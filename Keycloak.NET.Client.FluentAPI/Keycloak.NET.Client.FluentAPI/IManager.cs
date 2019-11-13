@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Keycloak.NET.FluentAPI
 {
-    public interface IAuthenticatorManager
+    public interface IManager
     {
         Net.Models.Users.User User { get; }
         ImmutableList<string> PriviligiesAsListOfNames();

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace UT.Keycloak.NET.FluentAPI.As_a_user
 {
-    public class When_AuthenticatorManager_Is_In_Use
+    public class When_Manager_Is_In_Use
     {
         [SetUp]
         public void Setup()
@@ -16,7 +16,7 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
         public async Task I_d_like_to_have_all_my_entitlements_downloaded_by_using_confidential_access_type()
         {
             //given
-            var service = new AuthenticatorManager();
+            var service = new AuthorizationManager();
 
             var context = Context.Create()
                 .Credentials(InputData.Username, InputData.Password)
@@ -41,7 +41,7 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
         public async Task I_d_like_to_have_all_my_entitlements_downloaded_by_using_public_access_type()
         {
             //given
-            var service = new AuthenticatorManager();
+            var service = new AuthorizationManager();
 
             var context = Context.Create()
                 .Credentials(InputData.Username, InputData.Password)
@@ -66,7 +66,7 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
         public async Task I_d_like_to_have_all_my_entitlements_downloaded_by_using_bearer_only_access_type()
         {
             //given
-            var service = new AuthenticatorManager();
+            var service = new AuthorizationManager();
 
             var context = Context.Create()
                 .Credentials(InputData.Username, InputData.Password)
