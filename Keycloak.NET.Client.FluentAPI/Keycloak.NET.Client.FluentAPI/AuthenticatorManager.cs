@@ -59,7 +59,7 @@ namespace Keycloak.NET.FluentAPI
 
         private async Task<bool> UsingSamlAsync(IContext context, CancellationToken token = default)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException("SAML protocol not supported for Desktop client.");
         }
 
         private async Task<bool> InServiceWayAsync(IContext context, CancellationToken token = default)
