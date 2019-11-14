@@ -1,4 +1,4 @@
-name: BuildAndTest
+name: BuildAndTestAndRunKeycloak
 
 on: [push]
 
