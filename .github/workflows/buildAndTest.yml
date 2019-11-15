@@ -14,8 +14,5 @@ jobs:
 
     - uses: barimale/keycloak_with_linux_docker_action@master
 
-    - name: Nuget Restore 
-      run: dotnet restore .\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI\\Keycloak.NET.Client.FluentAPI.csproj
-
     - name: UT Run Tests 
       run: dotnet test .\\UT.Keycloak.NET.Client.FluentAPI\\UT.Keycloak.NET.Client.FluentAPI.csproj --configuration Release
