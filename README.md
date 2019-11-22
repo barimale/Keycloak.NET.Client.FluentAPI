@@ -42,7 +42,7 @@
 	var isAuthorized = await service
 		.Authorize(context);
 
-	//than
+	//then
 	Assert.IsTrue(isAuthorized);
 	Assert.Greater(service.PriviligiesAsListOfNames().Count, 0);
 	Assert.Greater(service.PriviligiesAsListOfRoles().Count, 0);
