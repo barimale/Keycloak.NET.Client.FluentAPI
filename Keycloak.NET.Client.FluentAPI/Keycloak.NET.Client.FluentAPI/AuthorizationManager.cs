@@ -69,9 +69,7 @@ namespace Keycloak.NET.FluentAPI
 
         private async Task<bool> InConfidentialWayAsync(IContext context, CancellationToken token = default)
         {
-            try
-            {
-                Token = await context.ConnectionSettings.Url
+            Token = await context.ConnectionSettings.Url
                     .AppendPathSegment($"/auth/realms/{context.ConnectionSettings.Realm}/protocol/openid-connect/token")
                     .WithHeader("Content-Type", "application/x-www-form-urlencoded")
                     .WithBasicAuth(context.ConnectionSettings.ClientName, context.ConnectionSettings.ClientSecret)
@@ -84,36 +82,24 @@ namespace Keycloak.NET.FluentAPI
                     }, cancellationToken: token)
                     .ReceiveJson<AccessTokenResponse>();
 
-                return GetClaims(context);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return GetClaims(context);
         }
 
         private async Task<bool> InPublicWayAsync(IContext context, CancellationToken token = default)
         {
-            try
-            {
-                Token = await context.ConnectionSettings.Url
-                    .AppendPathSegment($"/auth/realms/{context.ConnectionSettings.Realm}/protocol/openid-connect/token")
-                    .WithHeader("Content-Type", "application/x-www-form-urlencoded")
-                    .PostUrlEncodedAsync(new List<KeyValuePair<string, string>>
-                    {
+            Token = await context.ConnectionSettings.Url
+                   .AppendPathSegment($"/auth/realms/{context.ConnectionSettings.Realm}/protocol/openid-connect/token")
+                   .WithHeader("Content-Type", "application/x-www-form-urlencoded")
+                   .PostUrlEncodedAsync(new List<KeyValuePair<string, string>>
+                   {
                         new KeyValuePair<string, string>("grant_type", "password"),
                         new KeyValuePair<string, string>("username", context.ConnectionSettings.Username),
                         new KeyValuePair<string, string>("password", context.ConnectionSettings.Password),
                         new KeyValuePair<string, string>("client_id", context.ConnectionSettings.ClientName)
-                    }, cancellationToken: token)
-                    .ReceiveJson<AccessTokenResponse>();
+                   }, cancellationToken: token)
+                   .ReceiveJson<AccessTokenResponse>();
 
-                return GetClaims(context);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return GetClaims(context);
         }
 
         private bool GetClaims(IContext context)
