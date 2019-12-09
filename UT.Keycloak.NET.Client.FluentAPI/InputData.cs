@@ -7,8 +7,8 @@
         public static string Endpoint = "http://localhost:8080/";
         public static string Realm = "DEV";
 
-        public static string ClientId = "soundManager-WPF";
-        public static string ClientSecret = "5972fab4-4f59-4aab-967f-9f24f81f14c2";
+        public static string ClientId = "SoundManager-WPF";
+        public static string ClientSecret = "223e036a-fe9d-4963-b198-956c99316270";
 
         public static string PublicClientId = "publicAccessType";
 

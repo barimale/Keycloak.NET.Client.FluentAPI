@@ -1,6 +1,7 @@
 ﻿using Flurl;
 using Flurl.Http;
 using Keycloak.Net.Models.Roles;
+using Keycloak.NET.Client.FluentAPI.Model;
 using Keycloak.NET.FluentAPI.Model;
 using Newtonsoft.Json;
 using System;
@@ -19,10 +20,13 @@ namespace Keycloak.NET.FluentAPI
 
         private readonly List<string> Priviligies = new List<string>();
 
+        private readonly List<string> RealmPriviligies = new List<string>();
+
+
         public AccessTokenResponse Token { get; private set; }
 
 
-        public Task<bool> Authorize(IContext context, CancellationToken token = default)
+        public Task<bool> AuthorizeAsync(IContext context, CancellationToken token = default)
         {
             try
             {
@@ -127,7 +131,7 @@ namespace Keycloak.NET.FluentAPI
                 var otherRoles = resourceAccessDes.FirstOrDefault(p => p.Key == context.ConnectionSettings.ClientName).Value;
 
                 if(realmRoles!=null)
-                    Priviligies.AddRange(realmRoles.Names);
+                    RealmPriviligies.AddRange(realmRoles.Names);
 
                 if (otherRoles != null)
                     Priviligies.AddRange(otherRoles.Names);
@@ -140,9 +144,25 @@ namespace Keycloak.NET.FluentAPI
             }
         }
 
+        public ImmutableList<string> RealmPriviligiesAsListOfNames()
+        {
+            return RealmPriviligies.ToImmutableList();
+        }
+
         public ImmutableList<string> PriviligiesAsListOfNames()
         {
             return Priviligies.ToImmutableList();
+        }
+
+        public ImmutableList<Role> RealmPriviligiesAsListOfRoles()
+        {
+            return RealmPriviligies.Select(p =>
+            {
+                return new Role
+                {
+                    Name = p
+                };
+            }).ToImmutableList();
         }
 
         public ImmutableList<Role> PriviligiesAsListOfRoles()
@@ -154,6 +174,11 @@ namespace Keycloak.NET.FluentAPI
                     Name = p
                 };
             }).ToImmutableList();
+        }
+
+        public ImmutableList<AtributedRole> AttributedPriviligiesAsListOfRoles()
+        {
+            throw new NotImplementedException();
         }
     }
 }

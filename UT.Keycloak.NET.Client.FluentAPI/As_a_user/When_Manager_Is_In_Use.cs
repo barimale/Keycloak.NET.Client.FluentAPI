@@ -27,10 +27,10 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
 
             //when
             var result = await service
-                .Authorize(context)
+                .AuthorizeAsync(context)
                 .ConfigureAwait(false);
 
-            //than
+            //then
             Assert.IsTrue(result);
             Assert.Greater(service.PriviligiesAsListOfNames().Count, 0);
             Assert.Greater(service.PriviligiesAsListOfRoles().Count, 0);
@@ -52,13 +52,15 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
 
             //when
             var result = await service
-                .Authorize(context)
+                .AuthorizeAsync(context)
                 .ConfigureAwait(false);
 
-            //than
+            //then
             Assert.IsTrue(result);
             Assert.Greater(service.PriviligiesAsListOfNames().Count, 0);
             Assert.Greater(service.PriviligiesAsListOfRoles().Count, 0);
+            Assert.Equals(service.RealmPriviligiesAsListOfNames().Count, 2);
+            Assert.Equals(service.RealmPriviligiesAsListOfRoles().Count, 2);
             Assert.NotNull(service.Token);
         }
 
@@ -77,10 +79,10 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
 
             //when
             var result = await service
-                .Authorize(context)
+                .AuthorizeAsync(context)
                 .ConfigureAwait(false);
 
-            //than
+            //then
             Assert.IsTrue(result);
             Assert.Greater(service.PriviligiesAsListOfNames().Count, 0);
             Assert.Greater(service.PriviligiesAsListOfRoles().Count, 0);
@@ -99,7 +101,7 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
                 .Saml()
                 .Certificate(string.Empty);
 
-            //than
+            //then
             Assert.NotNull(context);
         }
     }

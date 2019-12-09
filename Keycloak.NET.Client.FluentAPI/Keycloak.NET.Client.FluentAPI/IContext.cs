@@ -9,6 +9,7 @@ namespace Keycloak.NET.FluentAPI
         ClientProtocolType ProtocolType { get; set; }
         IConnectionSettings ConnectionSettings { get; }
     }
+
     public enum ClientProtocolType
     {
         openIdConnect,
