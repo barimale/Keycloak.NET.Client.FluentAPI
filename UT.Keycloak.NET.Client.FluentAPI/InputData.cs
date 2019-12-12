@@ -4,7 +4,7 @@
     {
         public static string Username = "foo";
         public static string Password = "bar";
-        public static string Endpoint = "http://localhost:8080/";
+        public static string Endpoint = "http://localhost:8085/";
         public static string Realm = "DEV";
 
         public static string ClientId = "Confidential";
