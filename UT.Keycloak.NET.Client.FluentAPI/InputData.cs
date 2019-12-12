@@ -2,17 +2,17 @@
 {
     public static class InputData
     {
-        public static string Username = "superuser";
-        public static string Password = "demo";
+        public static string Username = "foo";
+        public static string Password = "bar";
         public static string Endpoint = "http://localhost:8080/";
         public static string Realm = "DEV";
 
-        public static string ClientId = "SoundManager-WPF";
-        public static string ClientSecret = "223e036a-fe9d-4963-b198-956c99316270";
+        public static string ClientId = "Confidential";
+        public static string ClientSecret = "8a03e418-bf2d-42a4-b9d1-7d8f1ed633d5";
 
-        public static string PublicClientId = "publicAccessType";
+        public static string PublicClientId = "PublicAccessType";
 
         public static string BearerOnlyClientId = "BearerOnly";
-        public static string BearerOnlyClientSecret = "d0d4ebd0-2a49-4ba2-accb-9c603cbded88";
+        public static string BearerOnlyClientSecret = "ebccd71e-36a4-441c-94ab-f729e1fcdc24";
     }
 }
