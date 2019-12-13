@@ -1,5 +1,6 @@
 ﻿using Keycloak.NET.FluentAPI;
 using NUnit.Framework;
+using System;
 using System.Threading.Tasks;
 
 namespace UT.Keycloak.NET.FluentAPI.As_a_user
@@ -57,15 +58,15 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
 
             //then
             Assert.IsTrue(result);
-            Assert.Greater(service.PriviligiesAsListOfNames().Count, 0);
-            Assert.Greater(service.PriviligiesAsListOfRoles().Count, 0);
-            Assert.Equals(service.RealmPriviligiesAsListOfNames().Count, 2);
-            Assert.Equals(service.RealmPriviligiesAsListOfRoles().Count, 2);
+            Assert.AreEqual(service.PriviligiesAsListOfNames().Count, 1);
+            Assert.AreEqual(service.PriviligiesAsListOfRoles().Count, 1);
+            Assert.AreEqual(service.RealmPriviligiesAsListOfNames().Count, 2);
+            Assert.AreEqual(service.RealmPriviligiesAsListOfRoles().Count, 2);
             Assert.NotNull(service.Token);
         }
 
         [Test]
-        public async Task I_d_like_to_have_all_my_entitlements_downloaded_by_using_bearer_only_access_type()
+        public void I_d_like_to_have_all_my_entitlements_downloaded_by_using_bearer_only_access_type()
         {
             //given
             var service = new AuthorizationManager();
@@ -77,18 +78,18 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
                 .OpenIdConnect()
                 .BearerOnly(InputData.BearerOnlyClientId, InputData.BearerOnlyClientSecret);
 
-            //when
-            var result = await service
-                .AuthorizeAsync(context)
-                .ConfigureAwait(false);
+            var ex = Assert.Throws<AggregateException>(() =>
+            {
+                //when
+                var result = service.AuthorizeAsync(context).Result;
+            });
 
             //then
-            Assert.IsTrue(result);
-            Assert.Greater(service.PriviligiesAsListOfNames().Count, 0);
-            Assert.Greater(service.PriviligiesAsListOfRoles().Count, 0);
-            Assert.NotNull(service.Token);
+            Assert.IsNotNull(ex);
+            Assert.AreEqual(ex.InnerException.GetType(), typeof(NotImplementedException));
         }
 
+        [Test]
         public void I_d_like_to_have_context_with_saml_configuration()
         {
             //given

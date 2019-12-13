@@ -73,18 +73,26 @@ namespace Keycloak.NET.FluentAPI
 
         private async Task<bool> InConfidentialWayAsync(IContext context, CancellationToken token = default)
         {
-            Token = await context.ConnectionSettings.Url
-                    .AppendPathSegment($"/auth/realms/{context.ConnectionSettings.Realm}/protocol/openid-connect/token")
-                    .WithHeader("Content-Type", "application/x-www-form-urlencoded")
-                    .WithBasicAuth(context.ConnectionSettings.ClientName, context.ConnectionSettings.ClientSecret)
-                    .PostUrlEncodedAsync(new List<KeyValuePair<string, string>>
-                    {
+            try
+            {
+                Token = await context.ConnectionSettings.Url
+                   .AppendPathSegment($"/auth/realms/{context.ConnectionSettings.Realm}/protocol/openid-connect/token")
+                   .WithHeader("Content-Type", "application/x-www-form-urlencoded")
+                   .WithBasicAuth(context.ConnectionSettings.ClientName, context.ConnectionSettings.ClientSecret)
+                   .PostUrlEncodedAsync(new List<KeyValuePair<string, string>>
+                   {
                         new KeyValuePair<string, string>("grant_type", "password"),
                         new KeyValuePair<string, string>("username", context.ConnectionSettings.Username),
                         new KeyValuePair<string, string>("password", context.ConnectionSettings.Password),
                         new KeyValuePair<string, string>("client_id", context.ConnectionSettings.ClientName)
-                    }, cancellationToken: token)
-                    .ReceiveJson<AccessTokenResponse>();
+                   }, cancellationToken: token)
+                   .ReceiveJson<AccessTokenResponse>();
+            }
+            catch (Exception ex)
+            {
+                var i = 0;
+                throw;
+            }
 
             return GetClaims(context);
         }
