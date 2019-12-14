@@ -16,7 +16,7 @@ jobs:
       uses: warrenbuckley/Setup-Nuget@v1
 
     - name: Nuget Add source 
-      run: nuget sources Add -Name "GitHub" -Source "https://nuget.pkg.github.com/barimale/index.json" -UserName barimale -Password ${{ secrets.GITHUB_TOKEN }}
+      run: nuget sources Add -Name "GitHub" -Source "https://nuget.pkg.github.com/barimale/index.json" -UserName barimale -Password ${{ secrets.VS2019 }}
       
     - name: Nuget Add apiKey 
       run: nuget setapikey ${{ secrets.NUGET_ORG_TOKEN }} -Source "https://api.nuget.org/v3/index.json"
