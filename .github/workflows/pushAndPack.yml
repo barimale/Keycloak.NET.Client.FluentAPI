@@ -18,9 +18,14 @@ jobs:
     - name: Nuget Add source 
       run: nuget sources Add -Name "GitHub" -Source "https://nuget.pkg.github.com/barimale/index.json" -UserName barimale -Password ${{ secrets.GITHUB_TOKEN }}
       
+    - name: Nuget Add second source 
+      run: nuget sources Add -Name "nugetOrg" -Source "https://api.nuget.org/v3index.json"
+      
+    - name: Nuget Add apiKey 
+      run: nuget setapikey ${{ secrets.NUGET_ORG_TOKEN }} -Source "https://api.nuget.org/v3index.json"
+
     - name: Nuget Restore 
       run: nuget restore .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln
-
  #   - name: Build Solution for Net47
  #     run: dotnet build .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln --configuration Release --framework net47
 
@@ -31,4 +36,7 @@ jobs:
       run: nuget pack .\Keycloak.NET.Client.FluentAPI\pack.nuspec -Properties Configuration=Release -OutputDirectory .\nugetPackages
       
     - name: Nuget Push
+      run: nuget push .\nugetPackages\*.nupkg -Source nugetOrg 
+
+    - name: Nuget Push2
       run: nuget push .\nugetPackages\*.nupkg -Source GitHub 
