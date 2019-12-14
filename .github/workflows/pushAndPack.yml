@@ -33,7 +33,7 @@ jobs:
       run: nuget pack .\Keycloak.NET.Client.FluentAPI\pack.nuspec -Properties Configuration=Release -OutputDirectory .\nugetPackages
       
     - name: Nuget Push
-      run: nuget push .\nugetPackages\*.nupkg -Source "https://api.nuget.org/v3/index.json" 
+      run: nuget push .\nugetPackages\*.nupkg -Source "https://api.nuget.org/v3/index.json" --no-symbols
 
     - name: Nuget Push2
       run: nuget push .\nugetPackages\*.nupkg -Source GitHub 
