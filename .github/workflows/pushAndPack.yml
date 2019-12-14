@@ -18,9 +18,6 @@ jobs:
     - name: Nuget Add source 
       run: nuget sources Add -Name "GitHub" -Source "https://nuget.pkg.github.com/barimale/index.json" -UserName barimale -Password ${{ secrets.GITHUB_TOKEN }}
       
-    - name: Nuget Add second source 
-      run: nuget sources Add -Name "nugetOrg" -Source "https://api.nuget.org/v3/index.json"
-      
     - name: Nuget Add apiKey 
       run: nuget setapikey ${{ secrets.NUGET_ORG_TOKEN }} -Source "https://api.nuget.org/v3/index.json"
 
