@@ -2,21 +2,17 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net47</TargetFrameworks>
-    <AssemblyVersion>1.2.1.3</AssemblyVersion>
-    <FileVersion>1.2.1.3</FileVersion>
-    <Version>1.1.1</Version>
+    <AssemblyVersion>1.2.1.4</AssemblyVersion>
+    <FileVersion>1.2.1.4</FileVersion>
+    <Version>1.2.1.4</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>barimale</Authors>
+    <Description>Fluent API builder for Desktop apps</Description>
+    <RepositoryUrl>https://github.com/barimale/Keycloak.NET.Client.FluentAPI</RepositoryUrl>
+    <PackageTags>Keycloak.NET</PackageTags>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net47' ">
-    <PackageReference Include="Flurl.Http" Version="2.4.2" />
-    <PackageReference Include="Keycloak.Net" Version="1.0.4" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="SAML2" Version="3.0.0.6" />
-    <PackageReference Include="System.Collections.Immutable" Version="1.6.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+  <ItemGroup>
     <PackageReference Include="Flurl.Http" Version="2.4.2" />
     <PackageReference Include="Keycloak.Net" Version="1.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
