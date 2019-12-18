@@ -21,6 +21,9 @@ jobs:
     - name: Nuget Add apiKey 
       run: nuget setapikey ${{ secrets.NUGET_ORG_TOKEN }} -Source "https://api.nuget.org/v3/index.json"
 
+        - name: Nuget Add apiKey 
+      run: nuget setapikey ${{ secrets.NUGET_ORG_TOKEN }} -Source "https://www.nuget.org/api/v2/symbolpackage/"
+
     - name: Nuget Restore 
       run: nuget restore .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln
 

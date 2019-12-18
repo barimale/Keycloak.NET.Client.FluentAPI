@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net47</TargetFrameworks>
-    <AssemblyVersion>1.2.1.11</AssemblyVersion>
-    <FileVersion>1.2.1.11</FileVersion>
+    <AssemblyVersion>1.2.1.12</AssemblyVersion>
+    <FileVersion>1.2.1.12</FileVersion>
     <Version>1.2.1.4</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>barimale</Authors>
