@@ -10,10 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\Keycloak.NET.Client.Scripts\realm-export.json = ..\Keycloak.NET.Client.Scripts\realm-export.json
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".workflows", ".workflows", "{808DA828-04AB-4B46-B18A-01E9399EEDA7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{808DA828-04AB-4B46-B18A-01E9399EEDA7}"
 	ProjectSection(SolutionItems) = preProject
-		..\.github\workflows\buildAndTest.yml = ..\.github\workflows\buildAndTest.yml
-		..\.github\workflows\pushAndPack.yml = ..\.github\workflows\pushAndPack.yml
+		..\.github\workflows\publish.yml = ..\.github\workflows\publish.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Keycloak.NET.Client.FluentAPI", "Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.csproj", "{E06CCDC4-7B00-4183-A734-9116E56BA94E}"
