@@ -10,6 +10,8 @@
     <Description>Fluent API builder for Desktop apps</Description>
     <RepositoryUrl>https://github.com/barimale/Keycloak.NET.Client.FluentAPI</RepositoryUrl>
     <PackageTags>Keycloak.NET</PackageTags>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
