@@ -28,10 +28,10 @@ jobs:
       run: dotnet build .\Keycloak.NET.Client.FluentAPI\Keycloak.NET.Client.FluentAPI.sln --configuration Release
 
     - name: Nuget Pack
-      run: nuget pack .\Keycloak.NET.Client.FluentAPI\pack.nuspec -Properties Configuration=Release -OutputDirectory .\nugetPackages -SymbolPackageFormat snupkg
+      run: nuget pack .\Keycloak.NET.Client.FluentAPI\pack.nuspec -Properties Configuration=Release -OutputDirectory .\nugetPackages -Symbols -SymbolPackageFormat snupkg
       
     - name: Nuget Push2
       run: nuget push .\nugetPackages\*.nupkg -Source GitHub 
 
     - name: Nuget Push
-      run: nuget push .\nugetPackages\*.* -Source "https://api.nuget.org/v3/index.json"
+      run: nuget push .\nugetPackages\*.nupkg -Source "https://api.nuget.org/v3/index.json"
