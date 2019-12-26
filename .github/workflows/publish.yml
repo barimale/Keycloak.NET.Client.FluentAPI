@@ -30,6 +30,9 @@ jobs:
     - name: Nuget Pack
       run: nuget pack .\Keycloak.NET.Client.FluentAPI\pack.nuspec -Properties Configuration=Release -OutputDirectory .\nugetPackages -Symbols -SymbolPackageFormat snupkg 
 
+    - name: Nuget Pack2
+      run: nuget pack .\Keycloak.NET.Client.FluentAPI\secondPack.nuspec -Properties Configuration=Release -OutputDirectory .\nugetPackages -Symbols -SymbolPackageFormat snupkg 
+
     - name: Nuget Push2
       run: nuget push .\nugetPackages\*.nupkg -Source GitHub 
 

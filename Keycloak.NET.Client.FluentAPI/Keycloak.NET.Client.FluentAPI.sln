@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		pack.nuspec = pack.nuspec
 		..\README.md = ..\README.md
 		..\Keycloak.NET.Client.Scripts\realm-export.json = ..\Keycloak.NET.Client.Scripts\realm-export.json
+		secondPack.nuspec = secondPack.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{808DA828-04AB-4B46-B18A-01E9399EEDA7}"
