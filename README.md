@@ -44,7 +44,5 @@
 
 	//then
 	Assert.IsTrue(isAuthorized);
-	Assert.Greater(service.PriviligiesAsListOfNames().Count, 0);
-	Assert.Greater(service.PriviligiesAsListOfRoles().Count, 0);
 	Assert.NotNull(service.Token);
 ```
