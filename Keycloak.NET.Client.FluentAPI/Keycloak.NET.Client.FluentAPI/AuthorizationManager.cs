@@ -1,7 +1,6 @@
 ﻿using Flurl;
 using Flurl.Http;
 using Keycloak.Net.Models.Roles;
-using Keycloak.NET.Client.FluentAPI.Model;
 using Keycloak.NET.FluentAPI.Model;
 using Newtonsoft.Json;
 using System;
@@ -182,11 +181,6 @@ namespace Keycloak.NET.FluentAPI
                     Name = p
                 };
             }).ToImmutableList();
-        }
-
-        public ImmutableList<AtributedRole> AttributedPriviligiesAsListOfRoles()
-        {
-            throw new NotImplementedException();
         }
     }
 }
