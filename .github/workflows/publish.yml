@@ -13,8 +13,8 @@ jobs:
     - uses: actions/setup-dotnet@v1
 
     - name: Setup Nuget
-      uses: warrenbuckley/Setup-Nuget@v1
-
+      uses: NuGet/setup-nuget@v1
+      
     - name: Nuget Add source 
       run: nuget sources Add -Name "GitHub" -Source "https://nuget.pkg.github.com/barimale/index.json" -UserName barimale -Password ${{ secrets.VS2019 }}
       
