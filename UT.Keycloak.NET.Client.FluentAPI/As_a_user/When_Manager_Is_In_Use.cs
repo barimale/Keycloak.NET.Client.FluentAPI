@@ -1,5 +1,6 @@
 ﻿using Keycloak.NET.FluentAPI;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using System;
 using System.Threading.Tasks;
 
@@ -32,10 +33,10 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
                 .ConfigureAwait(false);
 
             //then
-            Assert.IsTrue(result);
-            Assert.Greater(service.PriviligiesAsListOfNames().Count, 0);
-            Assert.Greater(service.PriviligiesAsListOfRoles().Count, 0);
-            Assert.NotNull(service.Token);
+            ClassicAssert.IsTrue(result);
+            ClassicAssert.Greater(service.PriviligiesAsListOfNames().Count, 0);
+            ClassicAssert.Greater(service.PriviligiesAsListOfRoles().Count, 0);
+            ClassicAssert.NotNull(service.Token);
         }
 
         [Test]
@@ -57,12 +58,12 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
                 .ConfigureAwait(false);
 
             //then
-            Assert.IsTrue(result);
-            Assert.AreEqual(service.PriviligiesAsListOfNames().Count, 1);
-            Assert.AreEqual(service.PriviligiesAsListOfRoles().Count, 1);
-            Assert.AreEqual(service.RealmPriviligiesAsListOfNames().Count, 2);
-            Assert.AreEqual(service.RealmPriviligiesAsListOfRoles().Count, 2);
-            Assert.NotNull(service.Token);
+            ClassicAssert.IsTrue(result);
+            ClassicAssert.AreEqual(service.PriviligiesAsListOfNames().Count, 1);
+            ClassicAssert.AreEqual(service.PriviligiesAsListOfRoles().Count, 1);
+            ClassicAssert.AreEqual(service.RealmPriviligiesAsListOfNames().Count, 2);
+            ClassicAssert.AreEqual(service.RealmPriviligiesAsListOfRoles().Count, 2);
+            ClassicAssert.NotNull(service.Token);
         }
 
         [Test]
@@ -85,8 +86,8 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
             });
 
             //then
-            Assert.IsNotNull(ex);
-            Assert.AreEqual(ex.InnerException.GetType(), typeof(NotImplementedException));
+            ClassicAssert.IsNotNull(ex);
+            ClassicAssert.AreEqual(ex.InnerException.GetType(), typeof(NotImplementedException));
         }
 
         [Test]
@@ -103,7 +104,7 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_user
                 .Certificate(string.Empty);
 
             //then
-            Assert.NotNull(context);
+            ClassicAssert.NotNull(context);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Keycloak.NET.FluentAPI;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace UT.Keycloak.NET.FluentAPI.As_a_developer
 {
@@ -39,9 +40,9 @@ namespace UT.Keycloak.NET.FluentAPI.As_a_developer
                 .BearerOnly(InputData.ClientId, InputData.ClientSecret);
 
             //than
-            Assert.NotNull(publicContext);
-            Assert.NotNull(confidentialContext);
-            Assert.NotNull(bearerOnlyContext);
+            ClassicAssert.NotNull(publicContext);
+            ClassicAssert.NotNull(confidentialContext);
+            ClassicAssert.NotNull(bearerOnlyContext);
         }
     }
 }
