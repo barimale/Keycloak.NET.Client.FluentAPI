@@ -15,9 +15,6 @@ jobs:
     - name: Setup Nuget
       uses: NuGet/setup-nuget@v1
       
-    - name: Nuget Add source 
-      run: nuget sources Add -Name "GitHub" -Source "https://nuget.pkg.github.com/barimale/index.json" -UserName barimale -Password ${{ secrets.VS2019 }}
-      
     - name: Nuget Add apiKey 
       run: nuget setapikey ${{ secrets.NUGET_ORG_TOKEN }} -Source "https://api.nuget.org/v3/index.json"
 
@@ -32,9 +29,6 @@ jobs:
 
     - name: Nuget Pack2
       run: nuget pack .\Keycloak.NET.Client.FluentAPI\secondPack.nuspec -Properties Configuration=Release -OutputDirectory .\nugetPackages -Symbols -SymbolPackageFormat snupkg 
-
-    - name: Nuget Push to github
-      run: nuget push .\nugetPackages\*.nupkg -Source GitHub -SkipDuplicate
 
     - name: Nuget Push to nuget.org
       run: nuget push .\nugetPackages\*.nupkg -Source "https://api.nuget.org/v3/index.json" -SkipDuplicate -NoSymbols
