@@ -21,7 +21,7 @@
 		.Url(InputData.Endpoint)
 		.Realm(InputData.Realm)
 		.OpenIdConnect()
-		.BearerOnly(InputData.ClientId, InputData.ClientSecret);
+		.BearerOnly(InputData.BearerOnlyClientId, InputData.BearerOnlyClientSecret);
 ```
 
 2. Manager usage examples: 
