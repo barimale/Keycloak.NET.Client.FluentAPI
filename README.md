@@ -43,6 +43,6 @@
 		.Authorize(context);
 
 	//then
-	Assert.IsTrue(isAuthorized);
-	Assert.NotNull(service.Token);
+	ClassicAssert.IsTrue(isAuthorized);
+	ClassicAssert.NotNull(service.Token);
 ```
