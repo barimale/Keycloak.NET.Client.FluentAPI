@@ -8,32 +8,32 @@ namespace Keycloak.NET.FluentAPI.Model
     {
 
         [JsonPropertyName("access_token")]
-        public String token;
+        public String token { get; set; }
 
         [JsonPropertyName("expires_in")]
-        public long expiresIn;
+        public long expiresIn { get; set; }
 
         [JsonPropertyName("refresh_expires_in")]
-        public long refreshExpiresIn;
+        public long refreshExpiresIn { get; set; }
 
         [JsonPropertyName("refresh_token")]
-        public String refreshToken;
+        public String refreshToken { get; set; }
 
         [JsonPropertyName("token_type")]
-        public String tokenType;
+        public String tokenType { get; set; }
 
         [JsonPropertyName("id_token")]
-        public String idToken;
+        public String idToken { get; set; }
 
         [JsonPropertyName("not-before-policy")]
-        public int notBeforePolicy;
+        public int notBeforePolicy { get; set; }
 
         [JsonPropertyName("session_state")]
-        public String sessionState;
+        public String sessionState { get; set; }
 
         public Dictionary<String, Object> otherClaims = new Dictionary<String, Object>();
 
         [JsonPropertyName("scope")]
-        public String scope;
+        public String scope { get; set; }
     }
 }
