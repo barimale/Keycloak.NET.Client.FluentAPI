@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net47;net8.0</TargetFrameworks>
-    <AssemblyVersion>2.0.0.2</AssemblyVersion>
-    <FileVersion>2.0.0.2</FileVersion>
-    <Version>2.0.0.2</Version>
+    <AssemblyVersion>2.0.0.3</AssemblyVersion>
+    <FileVersion>2.0.0.3</FileVersion>
+    <Version>2.0.0.3</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>barimale</Authors>
     <Description>Fluent API builder for Desktop apps</Description>
