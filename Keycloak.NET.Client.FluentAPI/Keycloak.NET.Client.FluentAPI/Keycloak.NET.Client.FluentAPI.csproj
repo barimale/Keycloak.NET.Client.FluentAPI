@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net47;net8.0</TargetFrameworks>
-    <AssemblyVersion>2.0.0.4</AssemblyVersion>
-    <FileVersion>2.0.0.4</FileVersion>
-    <Version>2.0.0.4</Version>
+    <AssemblyVersion>2.0.0.5</AssemblyVersion>
+    <FileVersion>2.0.0.5</FileVersion>
+    <Version>2.0.0.5</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>barimale</Authors>
     <Description>Fluent API builder for Desktop apps</Description>
@@ -19,8 +19,8 @@
     <PackageReference Include="Keycloak.Net" Version="1.0.18" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SAML2" Version="3.2.0.74" />
-    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.2.0" />
+    <PackageReference Include="System.Collections.Immutable" Version="9.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.7.0" />
   </ItemGroup>
 
 </Project>
